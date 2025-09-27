@@ -6,16 +6,14 @@ LABEL org.opencontainers.image.licenses="MIT"
 
 RUN apt-get update -y \
  && apt-get install -y --no-install-recommends \
-      curl ca-certificates fontconfig libfreetype6 libstdc++6 lsof tzdata iproute2 locales \
+      curl ca-certificates fontconfig libfreetype6 libstdc++6 lsof tzdata iproute2 locales-all \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
- && useradd -m -d /home/container -s /bin/bash -u 1000 container \
- && locale-gen en_US.UTF-8
+ && useradd -m -d /home/container -s /bin/bash -u 1000 container
 
 ENV LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8 \
-    TZ=Etc/UTC
+    LANGUAGE=en_US.UTF-8
 
 WORKDIR /home/container
 ENV USER=container HOME=/home/container
