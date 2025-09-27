@@ -49,7 +49,7 @@ step() {
 # -----------------------------------------------------------------------------
 clear
 rule "="
-center "${BOLD}${LBLUE}Hosting${ORANGE}Remade ${PURPLE}•${LBLUE} Server Launcher${RESET}"
+center "${BOLD}${ORANGE}HostingRemade ${PURPLE}•${LBLUE} Server Launcher${RESET}"
 rule "="
 center "${DIM}Booting container UI…${RESET}"
 pln ""
@@ -85,7 +85,7 @@ done
 pln ""
 
 center "${BOLD}${ORANGE}Welcome to HostingRemade!${RESET}"
-center "${GREY}Need help? Join our Discord: ${BOLD}${ORANGE}dsc.gg/hostingremade${RESET}"
+center "${GREY}Need help? Join our Discord: ${BOLD}${ORANGE}discord.hostingremade.com${RESET}"
 rule "-"
 
 # -----------------------------------------------------------------------------
