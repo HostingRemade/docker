@@ -1,11 +1,11 @@
-FROM        eclipse-temurin:23-noble
+FROM        eclipse-temurin:23-jdk-noble
 
 LABEL       author="Daniel" maintainer="danielchu096@gmail.com"
 LABEL       org.opencontainers.image.source="https://github.com/hostingremade/docker"
 LABEL       org.opencontainers.image.licenses="MIT"
 
 RUN         apt-get update -y \
-            && apt-get install -y --no-install-recommends curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 libstdc++6 lsof build-essential tzdata iproute2 locales \
+            && apt-get install -y --no-install-recommends curl ca-certificates fontconfig libfreetype6 libstdc++6 lsof tzdata iproute2 locales \
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/* \
             && useradd -m -d /home/container container \
