@@ -1,23 +1,27 @@
-FROM        eclipse-temurin:24-jdk-noble
+FROM eclipse-temurin:24-jdk-noble
 
-LABEL       author="Daniel" maintainer="danielchu096@gmail.com"
-LABEL       org.opencontainers.image.source="https://github.com/hostingremade/docker"
-LABEL       org.opencontainers.image.licenses="MIT"
+LABEL author="Daniel" maintainer="danielchu096@gmail.com"
+LABEL org.opencontainers.image.source="https://github.com/hostingremade/docker"
+LABEL org.opencontainers.image.licenses="MIT"
 
-RUN         apt-get update -y \
-            && apt-get install -y --no-install-recommends curl ca-certificates fontconfig libfreetype6 libstdc++6 lsof tzdata iproute2 locales \
-            && apt-get clean \
-            && rm -rf /var/lib/apt/lists/* \
-            && useradd -m -d /home/container container \
-            && locale-gen en_US.UTF-8
+RUN apt-get update -y \
+ && apt-get install -y --no-install-recommends \
+      curl ca-certificates fontconfig libfreetype6 libstdc++6 lsof tzdata iproute2 locales \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+ && useradd -m -d /home/container -s /bin/bash -u 1000 container \
+ && locale-gen en_US.UTF-8
 
-ENV         LC_ALL=en_US.UTF-8
-ENV         LANG=en_US.UTF-8
-ENV         LANGUAGE=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    TZ=Etc/UTC
 
-USER        container
-ENV         USER=container HOME=/home/container
-WORKDIR     /home/container
+WORKDIR /home/container
+ENV USER=container HOME=/home/container
 
-COPY        ./entrypoint.sh /entrypoint.sh
-CMD         [ "/bin/bash", "/entrypoint.sh" ]
+COPY --chown=container:container ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+USER container
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
